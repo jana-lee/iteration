@@ -370,7 +370,128 @@ summary {
 </div>
 
 
+<div id="writing-functions" class="section level2">
+<h2>Writing Functions</h2>
+<pre class="r"><code>x = rnorm(n = 30, mean = 4, sd = 2.3)
+x_again = rnorm(n = 30, mean = 6, sd = .3) 
 
+y = rnorm(n = 30, mean = 24, sd = 2.3)
+(x - mean(x)) / sd(x)</code></pre>
+<pre><code>##  [1]  0.21477057  1.03255463  0.68948019 -0.67277990  0.74802437
+##  [6] -1.01097824  0.49910689 -0.18202662 -1.00370042 -0.54676989
+## [11] -0.14800647  1.08823197  0.07643473 -1.57875284  1.29064539
+## [16] -1.00308820  0.39041550 -2.55796309  1.52614027 -0.59924452
+## [21] -0.56355097 -0.23814188 -0.30418874 -1.17654917 -0.65131147
+## [26]  1.07804794  1.46106178  1.11637728 -0.07221147  1.09797236</code></pre>
+<pre class="r"><code>(x_again - mean(x_again)) / sd(x_again)</code></pre>
+<pre><code>##  [1]  1.29908098 -1.00471974  0.96570062 -0.28039822  0.77633892
+##  [6] -0.09484685 -1.04247840 -0.42329961  0.80886975 -1.50105560
+## [11]  2.16512287 -0.10133365  0.30057819  0.18920113 -1.23921075
+## [16] -0.30340009  0.80821144  1.06940716 -1.33816894  0.15729784
+## [21]  0.65041646 -0.17642891 -1.95592612  0.51928395  0.57007221
+## [26]  1.34664389 -0.48644363  0.37474606 -0.22988735 -1.82337360</code></pre>
+<p>But this is not great bc room for mistakes. Instead, we write a function.</p>
+<pre class="r"><code>z_score = function(x_arg) {
+  
+  if (!is.numeric(x_arg)) {
+    stop(&quot;x should be numeric&quot;)
+  } else if (length(x_arg) &lt; 3) {
+    stop(&quot;x should be longer than 3&quot;)
+  } 
+  
+  (x_arg - mean(x_arg)) / sd(x_arg)
+  
+}
+
+# Now, test the function:
+z_score(x = x_again)</code></pre>
+<pre><code>##  [1]  1.29908098 -1.00471974  0.96570062 -0.28039822  0.77633892
+##  [6] -0.09484685 -1.04247840 -0.42329961  0.80886975 -1.50105560
+## [11]  2.16512287 -0.10133365  0.30057819  0.18920113 -1.23921075
+## [16] -0.30340009  0.80821144  1.06940716 -1.33816894  0.15729784
+## [21]  0.65041646 -0.17642891 -1.95592612  0.51928395  0.57007221
+## [26]  1.34664389 -0.48644363  0.37474606 -0.22988735 -1.82337360</code></pre>
+<pre class="r"><code>#Any argument we put in here, we will get the function of z_score.</code></pre>
+<pre class="r"><code>z_score(x_arg = y)</code></pre>
+<pre><code>##  [1] -0.37389573  0.78121046 -0.60022766  1.92264050  0.19205224
+##  [6]  0.65369515 -1.34209332  1.02300274 -0.47430466  1.78317193
+## [11]  1.06556493  0.20904052 -1.87448210  0.17357314 -0.33879291
+## [16] -0.45056610  1.43103807  0.07520961 -0.88127267 -1.56475311
+## [21] -0.48440446 -0.23762033 -0.42240586  0.74360815  0.65260779
+## [26] -0.08896769  1.51341144 -0.68853318 -1.02224279 -1.37526410</code></pre>
+<pre class="r"><code>z_score(x_arg = 3)</code></pre>
+<pre><code>## Error in z_score(x_arg = 3): x should be longer than 3</code></pre>
+<pre class="r"><code>z_score(x_arg = &quot;my name is jeff&quot;)</code></pre>
+<pre><code>## Error in z_score(x_arg = &quot;my name is jeff&quot;): x should be numeric</code></pre>
+<pre class="r"><code>z_score(x_arg = c(TRUE, TRUE, FALSE, TRUE))</code></pre>
+<pre><code>## Error in z_score(x_arg = c(TRUE, TRUE, FALSE, TRUE)): x should be numeric</code></pre>
+<pre class="r"><code>z_score(x_arg = iris)</code></pre>
+<pre><code>## Error in z_score(x_arg = iris): x should be numeric</code></pre>
+<pre class="r"><code>mean_and_sd = function(input_x) {
+  
+  if (!is.numeric(input_x)) {
+    stop(&quot;x should be numeric&quot;)
+  } else if (length(input_x) &lt; 3) {
+    stop(&quot;x should be longer than 3&quot;)
+  } 
+  
+  list(
+    mean_input = mean(input_x),
+    sd_input = sd(input_x),
+    z_score = (input_x - mean(input_x)) / sd(input_x)
+  )
+  
+}
+
+mean_and_sd(input_x = y)</code></pre>
+<pre><code>## $mean_input
+## [1] 24.4181
+## 
+## $sd_input
+## [1] 2.600648
+## 
+## $z_score
+##  [1] -0.37389573  0.78121046 -0.60022766  1.92264050  0.19205224
+##  [6]  0.65369515 -1.34209332  1.02300274 -0.47430466  1.78317193
+## [11]  1.06556493  0.20904052 -1.87448210  0.17357314 -0.33879291
+## [16] -0.45056610  1.43103807  0.07520961 -0.88127267 -1.56475311
+## [21] -0.48440446 -0.23762033 -0.42240586  0.74360815  0.65260779
+## [26] -0.08896769  1.51341144 -0.68853318 -1.02224279 -1.37526410</code></pre>
+<p><strong>Lists</strong> = allow you any number of things you want to combine in 1 output structure.</p>
+<div id="multiple-outputs" class="section level3">
+<h3>Multiple Outputs</h3>
+<pre class="r"><code>sim_data = tibble(
+  x = rnorm(30, mean = 1, sd = 1),
+  y = 2 + 3 * x + rnorm(30, 0, 1)
+)
+
+ls_fit = lm(y ~ x, data = sim_data)
+  
+beta0_hat = coef(ls_fit)[1]
+beta1_hat = coef(ls_fit)[2]</code></pre>
+<p>Graphing this linear regression:</p>
+<pre class="r"><code>sim_regression = function(n, beta0 = 2, beta1 = 3) {
+  
+  sim_data = tibble(
+    x = rnorm(n, mean = 1, sd = 1),
+    y = beta0 + beta1 * x + rnorm(n, 0, 1)
+  )
+  
+  ls_fit = lm(y ~ x, data = sim_data)
+  
+  tibble(
+    beta0_hat = coef(ls_fit)[1],
+    beta1_hat = coef(ls_fit)[2]
+  )
+}
+
+sim_regression(n = 3000, beta0 = 17, beta1 = -3)</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   beta0_hat beta1_hat
+##       &lt;dbl&gt;     &lt;dbl&gt;
+## 1      17.0     -3.01</code></pre>
+</div>
+</div>
 
 
 
