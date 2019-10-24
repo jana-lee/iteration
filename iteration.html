@@ -377,19 +377,18 @@ x_again = rnorm(n = 30, mean = 6, sd = .3)
 
 y = rnorm(n = 30, mean = 24, sd = 2.3)
 (x - mean(x)) / sd(x)</code></pre>
-<pre><code>##  [1]  0.21477057  1.03255463  0.68948019 -0.67277990  0.74802437
-##  [6] -1.01097824  0.49910689 -0.18202662 -1.00370042 -0.54676989
-## [11] -0.14800647  1.08823197  0.07643473 -1.57875284  1.29064539
-## [16] -1.00308820  0.39041550 -2.55796309  1.52614027 -0.59924452
-## [21] -0.56355097 -0.23814188 -0.30418874 -1.17654917 -0.65131147
-## [26]  1.07804794  1.46106178  1.11637728 -0.07221147  1.09797236</code></pre>
+<pre><code>##  [1] -1.7300094 -0.7765079 -0.5051609 -0.4814958  0.4136943  0.2394354
+##  [7]  0.4774961  1.9102507  2.0355046  0.3386568  0.6731921 -0.4178756
+## [13] -1.1305887  1.7520030  1.1371397 -1.0216983  0.3591432 -0.8916672
+## [19] -0.7362512  1.4477966  0.1197904  0.3837333 -1.6203006 -0.8905711
+## [25] -0.7481778  0.8674827 -0.6028433 -0.4942424 -0.3480109  0.2400821</code></pre>
 <pre class="r"><code>(x_again - mean(x_again)) / sd(x_again)</code></pre>
-<pre><code>##  [1]  1.29908098 -1.00471974  0.96570062 -0.28039822  0.77633892
-##  [6] -0.09484685 -1.04247840 -0.42329961  0.80886975 -1.50105560
-## [11]  2.16512287 -0.10133365  0.30057819  0.18920113 -1.23921075
-## [16] -0.30340009  0.80821144  1.06940716 -1.33816894  0.15729784
-## [21]  0.65041646 -0.17642891 -1.95592612  0.51928395  0.57007221
-## [26]  1.34664389 -0.48644363  0.37474606 -0.22988735 -1.82337360</code></pre>
+<pre><code>##  [1]  0.12509390 -0.79822203  1.67092045 -0.48265134 -0.76197236
+##  [6]  1.63824480 -1.26339605 -0.26911146 -0.72978427 -0.75513308
+## [11] -0.41626862  1.44768662 -0.32044959  0.59419849 -0.04817909
+## [16] -0.42278612 -0.27948969 -1.46909729  1.49349861 -0.81988372
+## [21]  1.66434981  0.89786344 -0.03991491 -1.12971671 -0.17634564
+## [26]  1.22455614  1.55846789 -0.17814610 -0.48399802 -1.47033407</code></pre>
 <p>But this is not great bc room for mistakes. Instead, we write a function.</p>
 <pre class="r"><code>z_score = function(x_arg) {
   
@@ -405,20 +404,20 @@ y = rnorm(n = 30, mean = 24, sd = 2.3)
 
 # Now, test the function:
 z_score(x = x_again)</code></pre>
-<pre><code>##  [1]  1.29908098 -1.00471974  0.96570062 -0.28039822  0.77633892
-##  [6] -0.09484685 -1.04247840 -0.42329961  0.80886975 -1.50105560
-## [11]  2.16512287 -0.10133365  0.30057819  0.18920113 -1.23921075
-## [16] -0.30340009  0.80821144  1.06940716 -1.33816894  0.15729784
-## [21]  0.65041646 -0.17642891 -1.95592612  0.51928395  0.57007221
-## [26]  1.34664389 -0.48644363  0.37474606 -0.22988735 -1.82337360</code></pre>
+<pre><code>##  [1]  0.12509390 -0.79822203  1.67092045 -0.48265134 -0.76197236
+##  [6]  1.63824480 -1.26339605 -0.26911146 -0.72978427 -0.75513308
+## [11] -0.41626862  1.44768662 -0.32044959  0.59419849 -0.04817909
+## [16] -0.42278612 -0.27948969 -1.46909729  1.49349861 -0.81988372
+## [21]  1.66434981  0.89786344 -0.03991491 -1.12971671 -0.17634564
+## [26]  1.22455614  1.55846789 -0.17814610 -0.48399802 -1.47033407</code></pre>
 <pre class="r"><code>#Any argument we put in here, we will get the function of z_score.</code></pre>
 <pre class="r"><code>z_score(x_arg = y)</code></pre>
-<pre><code>##  [1] -0.37389573  0.78121046 -0.60022766  1.92264050  0.19205224
-##  [6]  0.65369515 -1.34209332  1.02300274 -0.47430466  1.78317193
-## [11]  1.06556493  0.20904052 -1.87448210  0.17357314 -0.33879291
-## [16] -0.45056610  1.43103807  0.07520961 -0.88127267 -1.56475311
-## [21] -0.48440446 -0.23762033 -0.42240586  0.74360815  0.65260779
-## [26] -0.08896769  1.51341144 -0.68853318 -1.02224279 -1.37526410</code></pre>
+<pre><code>##  [1] -0.09516485  1.44881978 -1.01022461 -0.48760275  0.22035376
+##  [6]  0.14533941  0.83527007 -1.75527099 -0.59721955  0.15598721
+## [11]  0.75939476  1.28560523  0.12585076 -0.59759176 -1.05151304
+## [16]  1.13555313  0.25436245 -1.21808385 -1.26119467  2.03204429
+## [21]  0.05770891  1.21277848 -2.24189587 -0.84649853  0.70089492
+## [26]  0.68059901 -0.35651690  0.69493380  0.29368723 -0.52040582</code></pre>
 <pre class="r"><code>z_score(x_arg = 3)</code></pre>
 <pre><code>## Error in z_score(x_arg = 3): x should be longer than 3</code></pre>
 <pre class="r"><code>z_score(x_arg = &quot;my name is jeff&quot;)</code></pre>
@@ -445,18 +444,18 @@ z_score(x = x_again)</code></pre>
 
 mean_and_sd(input_x = y)</code></pre>
 <pre><code>## $mean_input
-## [1] 24.4181
+## [1] 24.3395
 ## 
 ## $sd_input
-## [1] 2.600648
+## [1] 1.801722
 ## 
 ## $z_score
-##  [1] -0.37389573  0.78121046 -0.60022766  1.92264050  0.19205224
-##  [6]  0.65369515 -1.34209332  1.02300274 -0.47430466  1.78317193
-## [11]  1.06556493  0.20904052 -1.87448210  0.17357314 -0.33879291
-## [16] -0.45056610  1.43103807  0.07520961 -0.88127267 -1.56475311
-## [21] -0.48440446 -0.23762033 -0.42240586  0.74360815  0.65260779
-## [26] -0.08896769  1.51341144 -0.68853318 -1.02224279 -1.37526410</code></pre>
+##  [1] -0.09516485  1.44881978 -1.01022461 -0.48760275  0.22035376
+##  [6]  0.14533941  0.83527007 -1.75527099 -0.59721955  0.15598721
+## [11]  0.75939476  1.28560523  0.12585076 -0.59759176 -1.05151304
+## [16]  1.13555313  0.25436245 -1.21808385 -1.26119467  2.03204429
+## [21]  0.05770891  1.21277848 -2.24189587 -0.84649853  0.70089492
+## [26]  0.68059901 -0.35651690  0.69493380  0.29368723 -0.52040582</code></pre>
 <p><strong>Lists</strong> = allow you any number of things you want to combine in 1 output structure.</p>
 <div id="multiple-outputs" class="section level3">
 <h3>Multiple Outputs</h3>
@@ -489,8 +488,112 @@ sim_regression(n = 3000, beta0 = 17, beta1 = -3)</code></pre>
 <pre><code>## # A tibble: 1 x 2
 ##   beta0_hat beta1_hat
 ##       &lt;dbl&gt;     &lt;dbl&gt;
-## 1      17.0     -3.01</code></pre>
+## 1      17.0     -2.99</code></pre>
 </div>
+</div>
+<div id="scraping-on-napolean-dynamite-amazon-example" class="section level2">
+<h2>Scraping on Napolean Dynamite Amazon Example</h2>
+<p>Going to try to write a function for this, if we wanted to scrape multiple pages!</p>
+<pre class="r"><code>url = &quot;https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp_d_viewopt_rvwer?ie=UTF8&amp;reviewerType=avp_only_reviews&amp;sortBy=recent&amp;pageNumber=1&quot;
+
+dynamite_html = read_html(url)
+
+review_titles = dynamite_html %&gt;%
+  html_nodes(&quot;#cm_cr-review_list .review-title&quot;) %&gt;%
+  html_text()
+
+review_stars = dynamite_html %&gt;%
+  html_nodes(&quot;#cm_cr-review_list .review-rating&quot;) %&gt;%
+  html_text()
+
+review_text = dynamite_html %&gt;%
+    html_nodes(&quot;.review-data:nth-child(4)&quot;) %&gt;%
+    html_text()
+
+reviews = tibble(
+  title = review_titles,
+  stars = review_stars,
+  text = review_text
+)</code></pre>
+<pre class="r"><code>read_page_reviews = function(page_url) {
+  dynamite_html = read_html(url)
+
+review_titles = dynamite_html %&gt;%
+  html_nodes(&quot;#cm_cr-review_list .review-title&quot;) %&gt;%
+  html_text()
+
+review_stars = dynamite_html %&gt;%
+  html_nodes(&quot;#cm_cr-review_list .review-rating&quot;) %&gt;%
+  html_text()
+
+review_text = dynamite_html %&gt;%
+    html_nodes(&quot;.review-data:nth-child(4)&quot;) %&gt;%
+    html_text()
+
+reviews = tibble(
+  title = review_titles,
+  stars = review_stars,
+  text = review_text)
+
+  reviews
+}</code></pre>
+<p>Option + shift + click = can have multiple cursors</p>
+<pre class="r"><code>read_page_reviews(&quot;https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp_d_viewopt_rvwer?ie=UTF8&amp;reviewerType=avp_only_reviews&amp;sortBy=recent&amp;pageNumber=1&quot;)</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    title                           stars         text                      
+##    &lt;chr&gt;                           &lt;chr&gt;         &lt;chr&gt;                     
+##  1 &quot;Great movie\n            &quot;     5.0 out of 5… Format: Blu-rayVerified P…
+##  2 &quot;Duh\n            &quot;             5.0 out of 5… Format: Prime VideoVerifi…
+##  3 &quot;Great video\n            &quot;     5.0 out of 5… Format: DVDVerified Purch…
+##  4 &quot;Give me some of your tots\n  … 5.0 out of 5… Format: Prime VideoVerifi…
+##  5 &quot;Nostalgic\n            &quot;       5.0 out of 5… Format: Prime VideoVerifi…
+##  6 &quot;Make you giggle type movie\n … 5.0 out of 5… Format: Blu-rayVerified P…
+##  7 &quot;This movie is so stupid.\n   … 5.0 out of 5… Format: Prime VideoVerifi…
+##  8 &quot;Hilarious\n            &quot;       5.0 out of 5… Format: Prime VideoVerifi…
+##  9 &quot;Waste of money\n            &quot;  1.0 out of 5… Format: Prime VideoVerifi…
+## 10 &quot;Good movie\n            &quot;      5.0 out of 5… Format: Prime VideoVerifi…</code></pre>
+<pre class="r"><code>read_page_reviews(&quot;https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp_d_viewopt_rvwer?ie=UTF8&amp;reviewerType=avp_only_reviews&amp;sortBy=recent&amp;pageNumber=2&quot;)</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    title                           stars         text                      
+##    &lt;chr&gt;                           &lt;chr&gt;         &lt;chr&gt;                     
+##  1 &quot;Great movie\n            &quot;     5.0 out of 5… Format: Blu-rayVerified P…
+##  2 &quot;Duh\n            &quot;             5.0 out of 5… Format: Prime VideoVerifi…
+##  3 &quot;Great video\n            &quot;     5.0 out of 5… Format: DVDVerified Purch…
+##  4 &quot;Give me some of your tots\n  … 5.0 out of 5… Format: Prime VideoVerifi…
+##  5 &quot;Nostalgic\n            &quot;       5.0 out of 5… Format: Prime VideoVerifi…
+##  6 &quot;Make you giggle type movie\n … 5.0 out of 5… Format: Blu-rayVerified P…
+##  7 &quot;This movie is so stupid.\n   … 5.0 out of 5… Format: Prime VideoVerifi…
+##  8 &quot;Hilarious\n            &quot;       5.0 out of 5… Format: Prime VideoVerifi…
+##  9 &quot;Waste of money\n            &quot;  1.0 out of 5… Format: Prime VideoVerifi…
+## 10 &quot;Good movie\n            &quot;      5.0 out of 5… Format: Prime VideoVerifi…</code></pre>
+<pre class="r"><code>read_page_reviews(&quot;https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp_d_viewopt_rvwer?ie=UTF8&amp;reviewerType=avp_only_reviews&amp;sortBy=recent&amp;pageNumber=3&quot;)</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    title                           stars         text                      
+##    &lt;chr&gt;                           &lt;chr&gt;         &lt;chr&gt;                     
+##  1 &quot;Great movie\n            &quot;     5.0 out of 5… Format: Blu-rayVerified P…
+##  2 &quot;Duh\n            &quot;             5.0 out of 5… Format: Prime VideoVerifi…
+##  3 &quot;Great video\n            &quot;     5.0 out of 5… Format: DVDVerified Purch…
+##  4 &quot;Give me some of your tots\n  … 5.0 out of 5… Format: Prime VideoVerifi…
+##  5 &quot;Nostalgic\n            &quot;       5.0 out of 5… Format: Prime VideoVerifi…
+##  6 &quot;Make you giggle type movie\n … 5.0 out of 5… Format: Blu-rayVerified P…
+##  7 &quot;This movie is so stupid.\n   … 5.0 out of 5… Format: Prime VideoVerifi…
+##  8 &quot;Hilarious\n            &quot;       5.0 out of 5… Format: Prime VideoVerifi…
+##  9 &quot;Waste of money\n            &quot;  1.0 out of 5… Format: Prime VideoVerifi…
+## 10 &quot;Good movie\n            &quot;      5.0 out of 5… Format: Prime VideoVerifi…</code></pre>
+<pre class="r"><code>read_page_reviews(&quot;https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp_d_viewopt_rvwer?ie=UTF8&amp;reviewerType=avp_only_reviews&amp;sortBy=recent&amp;pageNumber=4&quot;)</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    title                           stars         text                      
+##    &lt;chr&gt;                           &lt;chr&gt;         &lt;chr&gt;                     
+##  1 &quot;Great movie\n            &quot;     5.0 out of 5… Format: Blu-rayVerified P…
+##  2 &quot;Duh\n            &quot;             5.0 out of 5… Format: Prime VideoVerifi…
+##  3 &quot;Great video\n            &quot;     5.0 out of 5… Format: DVDVerified Purch…
+##  4 &quot;Give me some of your tots\n  … 5.0 out of 5… Format: Prime VideoVerifi…
+##  5 &quot;Nostalgic\n            &quot;       5.0 out of 5… Format: Prime VideoVerifi…
+##  6 &quot;Make you giggle type movie\n … 5.0 out of 5… Format: Blu-rayVerified P…
+##  7 &quot;This movie is so stupid.\n   … 5.0 out of 5… Format: Prime VideoVerifi…
+##  8 &quot;Hilarious\n            &quot;       5.0 out of 5… Format: Prime VideoVerifi…
+##  9 &quot;Waste of money\n            &quot;  1.0 out of 5… Format: Prime VideoVerifi…
+## 10 &quot;Good movie\n            &quot;      5.0 out of 5… Format: Prime VideoVerifi…</code></pre>
 </div>
 
 
