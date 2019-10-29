@@ -26,7 +26,7 @@ scale_fill_discrete = scale_fill_viridis_d
 theme_set(theme_minimal() + theme(legend.position = "bottom"))
 ```
 
-## Writing Functions
+# Writing Functions
 ```{r}
 x = rnorm(n = 30, mean = 4, sd = 2.3)
 x_again = rnorm(n = 30, mean = 6, sd = .3) 
@@ -87,7 +87,7 @@ mean_and_sd(input_x = y)
 ```
 **Lists** = allow you any number of things you want to combine in 1 output structure.
 
-### Multiple Outputs
+## Multiple Outputs
 ```{r}
 sim_data = tibble(
   x = rnorm(30, mean = 1, sd = 1),
@@ -184,5 +184,89 @@ read_page_reviews("https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_a
 read_page_reviews("https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp_d_viewopt_rvwer?ie=UTF8&reviewerType=avp_only_reviews&sortBy=recent&pageNumber=3")
 
 read_page_reviews("https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp_d_viewopt_rvwer?ie=UTF8&reviewerType=avp_only_reviews&sortBy=recent&pageNumber=4")
+```
+
+
+
+
+# Iteration and List Columns
+
+Why iterate? 
+- need to write the same basic thing a lot
+
+## for loops
+loops - an output object, a sequence to iterate over, the loop body, and an input object. Going to use purr package
+
+- map function - prodces the same result as the for loop, but emphasizes the input and function and reduces the amount of overhead
+
+## Lists
+- not necessarily single numbers, lists give us a way to put whatever we want to inside of there
+- they are fantastic!
+- List column = 
+```{r}
+library(tidyverse)
+
+set.seed(1)
+```
+
+### Making a list
+```{r}
+l = list(vec_numeric = 5:8,
+         mat         = matrix(1:8, 2, 4),
+         vec_logical = c(TRUE, FALSE),
+         summary     = summary(rnorm(1000)))
+l
+
+mean(l$vec_numeric)
+```
+
+Setting up for for loop
+```{r}
+df = list(
+  a = rnorm(20, 3, 1),
+  b = rnorm(20, 0, 5),
+  c = rnorm(20, 10, .2),
+  d = rnorm(20, -3, 1)
+)
+
+df$a
+df[[2]]
+
+is.list(df)
+
+mean_and_sd = function(x) {
+  
+  if (!is.numeric(x)) {
+    stop("Argument x should be numeric")
+  } else if (length(x) == 1) {
+    stop("Cannot be computed for length 1 vectors")
+  }
+  
+  mean_x = mean(x)
+  sd_x = sd(x)
+
+  tibble(
+    mean = mean_x, 
+    sd = sd_x
+  )
+}
+
+```
+
+## for loops
+Taking mean and sd for every list is not efficient. Using for loops will make it more efficient.
+```{r}
+output = vector("list", length = 4)
+
+for (i in 1:4) {
+  output[[i]] = mean_and_sd(df[[i]])
+}
+
+output = map(df, mean_and_sd)
+# this map makes it easier to read, can map across each element
+
+output_median = map(df, median)
+
+output_summary = map(df, summary)
 ```
 
